@@ -1,0 +1,2 @@
+com.shuaiwu.cloud.framework.redis.config.ShuaiwuRedisAutoConfiguration
+com.shuaiwu.cloud.framework.redis.config.ShuaiwuCacheAutoConfiguration

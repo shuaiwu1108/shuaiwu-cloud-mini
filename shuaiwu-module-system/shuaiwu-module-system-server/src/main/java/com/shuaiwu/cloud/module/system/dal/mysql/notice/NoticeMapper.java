@@ -1,0 +1,20 @@
+package com.shuaiwu.cloud.module.system.dal.mysql.notice;
+
+import com.shuaiwu.cloud.framework.common.pojo.PageResult;
+import com.shuaiwu.cloud.framework.mybatis.core.mapper.BaseMapperX;
+import com.shuaiwu.cloud.framework.mybatis.core.query.LambdaQueryWrapperX;
+import com.shuaiwu.cloud.module.system.controller.admin.notice.vo.NoticePageReqVO;
+import com.shuaiwu.cloud.module.system.dal.dataobject.notice.NoticeDO;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface NoticeMapper extends BaseMapperX<NoticeDO> {
+
+    default PageResult<NoticeDO> selectPage(NoticePageReqVO reqVO) {
+        return selectPage(reqVO, new LambdaQueryWrapperX<NoticeDO>()
+                .likeIfPresent(NoticeDO::getTitle, reqVO.getTitle())
+                .eqIfPresent(NoticeDO::getStatus, reqVO.getStatus())
+                .orderByDesc(NoticeDO::getId));
+    }
+
+}

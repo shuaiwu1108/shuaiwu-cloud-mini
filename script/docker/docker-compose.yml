@@ -1,0 +1,100 @@
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0.43-debian
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/logs:/logs
+      - ./mysql/data:/var/lib/mysql
+    command: [
+      'mysqld',
+      '--innodb-buffer-pool-size=80M',
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--default-time-zone=+8:00',
+      '--lower-case-table-names=1'
+    ]
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      local-network:
+        ipv4_address: 172.16.30.11
+  nacos:
+    container_name: nacos
+    image: nacos/nacos-server:latest
+    environment:
+      - MODE=standalone
+      - NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
+      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
+      - NACOS_AUTH_IDENTITY_VALUE=security
+    volumes:
+      - ./nacos/data:/home/nacos/data
+    ports:
+      - "8080:8080"
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    networks:
+      local-network:
+        ipv4_address: 172.16.30.12
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/conf/redis.conf:/redis.conf
+      - ./redis/data:/data
+    command: redis-server /redis.conf
+    networks:
+      local-network:
+        ipv4_address: 172.16.30.13
+  rocketmq:
+    container_name: rocketmq
+    image: apache/rocketmq:5.3.3
+    ports:
+      - "9876:9876"
+      - "10911:10911"
+    volumes:
+      - ./rocketmq/logs:/home/rocketmq/logs
+      - ./rocketmq/store:/home/rocketmq/store
+    command: sh mqnamesrv && sh mqbroker -n localhost:9876
+    networks:
+      local-network:
+        ipv4_address: 172.16.30.14
+  xxljob:
+    container_name: xxl-job
+    image: xuxueli/xxl-job-admin:3.1.1
+    ports:
+      - "8081:8081"
+    environment:
+      - XXL_JOB_ACCESS
+      - XXL_JOB_ADMIN_ADDRESS=http://localhost:8081/xxl-job-admin
+      - XXL_JOB_ADMIN_ACCESS_TOKEN=your_access_token
+    volumes:
+      - ./xxljob/logs:/var/log/xxl-job
+      - ./xxljob/conf/application.properties:/application.properties
+    depends_on:
+      - mysql
+    networks:
+      local-network:
+        ipv4_address: 172.16.30.15
+  rustfs:
+    container_name: rustfs
+    image: rustfs/rustfs:alpha
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./rustfs/data:/data
+    networks:
+      local-network:
+        ipv4_address: 172.16.30.18
+networks:
+  local-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.30.0/24
+          gateway: 172.16.30.1

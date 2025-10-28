@@ -1,0 +1,3 @@
+com.shuaiwu.cloud.framework.datasource.config.ShuaiwuDataSourceAutoConfiguration
+com.shuaiwu.cloud.framework.mybatis.config.ShuaiwuMybatisAutoConfiguration
+com.shuaiwu.cloud.framework.translate.config.ShuaiwuTranslateAutoConfiguration

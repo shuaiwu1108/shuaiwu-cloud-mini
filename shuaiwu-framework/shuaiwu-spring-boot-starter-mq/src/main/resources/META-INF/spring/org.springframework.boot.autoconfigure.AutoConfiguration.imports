@@ -1,0 +1,3 @@
+com.shuaiwu.cloud.framework.mq.redis.config.ShuaiwuRedisMQProducerAutoConfiguration
+com.shuaiwu.cloud.framework.mq.redis.config.ShuaiwuRedisMQConsumerAutoConfiguration
+com.shuaiwu.cloud.framework.mq.rabbitmq.config.ShuaiwuRabbitMQAutoConfiguration

@@ -1,0 +1,2 @@
+com.shuaiwu.cloud.framework.quartz.config.ShuaiwuXxlJobAutoConfiguration
+com.shuaiwu.cloud.framework.quartz.config.ShuaiwuAsyncAutoConfiguration

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: gateway-server
+  profiles:
+    active: local
+  config:
+    import:
+      - optional:classpath:application-${spring.profiles.active}.yaml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml
+server:
+  port: 49090

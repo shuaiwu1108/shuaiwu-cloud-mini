@@ -1,0 +1,2 @@
+com.shuaiwu.cloud.framework.env.config.ShuaiwuEnvWebAutoConfiguration
+com.shuaiwu.cloud.framework.env.config.ShuaiwuEnvRpcAutoConfiguration

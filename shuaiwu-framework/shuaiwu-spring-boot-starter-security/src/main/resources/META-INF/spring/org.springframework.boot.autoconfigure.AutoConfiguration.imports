@@ -1,0 +1,5 @@
+com.shuaiwu.cloud.framework.security.config.ShuaiwuSecurityRpcAutoConfiguration
+com.shuaiwu.cloud.framework.security.config.ShuaiwuSecurityAutoConfiguration
+com.shuaiwu.cloud.framework.security.config.ShuaiwuWebSecurityConfigurerAdapter
+com.shuaiwu.cloud.framework.operatelog.config.ShuaiwuOperateLogConfiguration
+com.shuaiwu.cloud.framework.operatelog.config.ShuaiwuOperateLogRpcAutoConfiguration

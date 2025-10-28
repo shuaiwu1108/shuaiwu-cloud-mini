@@ -1,0 +1,2 @@
+com.shuaiwu.cloud.framework.tracer.config.ShuaiwuTracerAutoConfiguration
+com.shuaiwu.cloud.framework.tracer.config.ShuaiwuMetricsAutoConfiguration

@@ -1,0 +1,7 @@
+com.shuaiwu.cloud.framework.apilog.config.ShuaiwuApiLogAutoConfiguration
+com.shuaiwu.cloud.framework.jackson.config.ShuaiwuJacksonAutoConfiguration
+com.shuaiwu.cloud.framework.swagger.config.ShuaiwuSwaggerAutoConfiguration
+com.shuaiwu.cloud.framework.web.config.ShuaiwuWebAutoConfiguration
+com.shuaiwu.cloud.framework.apilog.config.ShuaiwuApiLogRpcAutoConfiguration
+com.shuaiwu.cloud.framework.xss.config.ShuaiwuXssAutoConfiguration
+com.shuaiwu.cloud.framework.banner.config.ShuaiwuBannerAutoConfiguration

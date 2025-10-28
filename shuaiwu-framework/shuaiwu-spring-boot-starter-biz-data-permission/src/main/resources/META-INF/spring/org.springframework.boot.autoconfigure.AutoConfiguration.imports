@@ -1,0 +1,3 @@
+com.shuaiwu.cloud.framework.datapermission.config.ShuaiwuDataPermissionAutoConfiguration
+com.shuaiwu.cloud.framework.datapermission.config.ShuaiwuDeptDataPermissionAutoConfiguration
+com.shuaiwu.cloud.framework.datapermission.config.ShuaiwuDataPermissionRpcAutoConfiguration

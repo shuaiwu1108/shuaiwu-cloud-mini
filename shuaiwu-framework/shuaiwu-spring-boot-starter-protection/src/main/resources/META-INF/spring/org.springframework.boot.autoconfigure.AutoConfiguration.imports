@@ -1,0 +1,4 @@
+com.shuaiwu.cloud.framework.idempotent.config.ShuaiwuIdempotentConfiguration
+com.shuaiwu.cloud.framework.lock4j.config.ShuaiwuLock4jConfiguration
+com.shuaiwu.cloud.framework.ratelimiter.config.ShuaiwuRateLimiterConfiguration
+com.shuaiwu.cloud.framework.signature.config.ShuaiwuApiSignatureAutoConfiguration

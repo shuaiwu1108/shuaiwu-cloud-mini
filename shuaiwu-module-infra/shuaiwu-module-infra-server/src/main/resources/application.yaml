@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: infra-server
+  profiles:
+    active: local
+  config:
+    import:
+      - optional:classpath:application-${spring.profiles.active}.yaml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml
+      - optional:nacos:common-datasource.yaml
+      - optional:nacos:common-server.yaml
+server:
+  port: 49092
