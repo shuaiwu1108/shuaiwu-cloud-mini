@@ -16,6 +16,7 @@
         <module>shuaiwu-module-system</module>
         <module>shuaiwu-module-infra</module>
         <module>shuaiwu-module-xhs</module>
+        <module>shuaiwu-module-ai</module>
     </modules>
 
     <name>${project.artifactId}</name>
