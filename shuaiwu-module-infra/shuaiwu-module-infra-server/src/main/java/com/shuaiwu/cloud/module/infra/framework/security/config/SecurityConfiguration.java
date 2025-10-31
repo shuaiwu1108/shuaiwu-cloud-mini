@@ -28,14 +28,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/webjars/**").permitAll()
                         .requestMatchers("/swagger-ui").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll();
-                // Spring Boot Actuator 的安全配置
-                registry.requestMatchers("/actuator").permitAll()
-                        .requestMatchers("/actuator/**").permitAll();
                 // Druid 监控
                 registry.requestMatchers("/druid/**").permitAll();
-                // Spring Boot Admin Server 的安全配置
-                registry.requestMatchers(adminSeverContextPath).permitAll()
-                        .requestMatchers(adminSeverContextPath + "/**").permitAll();
                 // 文件读取
                 registry.requestMatchers(buildAdminApi("/infra/file/*/get/**")).permitAll();
 

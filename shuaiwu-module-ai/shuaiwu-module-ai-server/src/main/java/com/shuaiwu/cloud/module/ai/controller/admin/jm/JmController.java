@@ -11,9 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
@@ -32,7 +30,7 @@ public class JmController {
     @Value("${jm.info.sk:test}")
     private String sk;
 
-    @GetMapping("/info")
+    @PostMapping("/info-t2i")
     @Operation(summary = "内容生成")
     public CommonResult<Map<String, Object>> t2i(@Valid JmReqVO reqVO) {
         // 请求域名

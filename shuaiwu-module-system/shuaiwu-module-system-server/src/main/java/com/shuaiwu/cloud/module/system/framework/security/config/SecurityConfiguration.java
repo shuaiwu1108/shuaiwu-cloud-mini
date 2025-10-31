@@ -27,9 +27,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/swagger-ui/**").permitAll();
                 // Druid 监控
                 registry.requestMatchers("/druid/**").permitAll();
-                // Spring Boot Actuator 的安全配置
-                registry.requestMatchers("/actuator").permitAll()
-                        .requestMatchers("/actuator/**").permitAll();
+
                 // RPC 服务的安全配置
                 registry.requestMatchers(ApiConstants.PREFIX + "/**").permitAll();
             }
