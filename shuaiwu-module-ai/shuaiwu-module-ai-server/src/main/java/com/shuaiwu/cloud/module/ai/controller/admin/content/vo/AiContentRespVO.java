@@ -37,7 +37,7 @@ public class AiContentRespVO {
 
     @Schema(description = "文件列表")
     @ExcelProperty("文件列表")
-    private String files;
+    private List<String> files;
 
     @Schema(description = "备注")
     @ExcelProperty("备注")

@@ -5,6 +5,7 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.shuaiwu.cloud.framework.common.pojo.CommonResult;
+import com.shuaiwu.cloud.framework.common.util.io.FileUtils;
 import com.shuaiwu.cloud.module.ai.controller.admin.content.vo.AiContentPageReqVO;
 import com.shuaiwu.cloud.module.ai.controller.admin.jm.JmController;
 import com.shuaiwu.cloud.module.ai.controller.admin.jm.vo.JmSearchReqVO;
@@ -12,11 +13,13 @@ import com.shuaiwu.cloud.module.ai.dal.dataobject.content.AiContentDO;
 import com.shuaiwu.cloud.module.ai.dal.mysql.content.AiContentMapper;
 import com.shuaiwu.cloud.module.ai.service.content.AiContentService;
 import com.shuaiwu.cloud.module.ai.controller.admin.content.vo.AiContentSaveReqVO;
+import com.shuaiwu.cloud.module.infra.api.file.FileApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +35,9 @@ public class JmTaskJob {
     
     @Autowired
     private JmController jmController;
+
+    @Autowired
+    private FileApi fileApi;
     
     // 每30秒执行一次任务查询
     @Scheduled(fixedDelay = 30000)
@@ -79,8 +85,16 @@ public class JmTaskJob {
                     // 获取图片URL数组
                     JSONArray imageUrl = data.getJSONArray("image_urls");
                     if (imageUrl != null && !imageUrl.isEmpty()) {
+                        List<String> imageUrls = new ArrayList<>();
+                        // 循环图片URL数组，将图片保存到minio
+                        for (int i = 0; i < imageUrl.size(); i++) {
+                            String url = imageUrl.getStr(i);
+                            String localFileUrl = fileApi.createFile(FileUtils.getFileContent(url), null, "image/png");
+                            imageUrls.add(localFileUrl);
+                        }
+
                         // 更新作品数据，将图片URL存入files字段
-                        content.setFiles(imageUrl.toString()); // 保存图片URL
+                        content.setFiles(imageUrls); // 保存图片URL
                         aiContentMapper.updateById(content);
                         log.info("任务{}已完成，图片URL已保存到作品ID:{}", content.getRemark(), content.getId());
                     }

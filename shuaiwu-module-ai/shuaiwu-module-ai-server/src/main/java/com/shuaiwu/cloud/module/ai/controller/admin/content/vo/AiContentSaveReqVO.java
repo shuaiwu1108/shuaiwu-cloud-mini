@@ -1,5 +1,7 @@
 package com.shuaiwu.cloud.module.ai.controller.admin.content.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import java.util.*;
@@ -26,7 +28,7 @@ public class AiContentSaveReqVO {
     private String prompt;
 
     @Schema(description = "文件列表")
-    private String files;
+    private List<String> files;
 
     @Schema(description = "备注")
     private String remark;

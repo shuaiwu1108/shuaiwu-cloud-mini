@@ -1,5 +1,6 @@
 package com.shuaiwu.cloud.module.ai.dal.dataobject.content;
 
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.*;
 import java.util.*;
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ import com.shuaiwu.cloud.framework.mybatis.core.dataobject.BaseDO;
  *
  * @author shuaiwu
  */
-@TableName("ai_content")
+@TableName(value = "ai_content", autoResultMap = true)
 @KeySequence("ai_content_seq") // 用于 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库的主键自增。如果是 MySQL 等数据库，可不写。
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -48,7 +49,8 @@ public class AiContentDO extends BaseDO {
     /**
      * 文件列表
      */
-    private String files;
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private List<String> files;
 
     /**
      * 备注

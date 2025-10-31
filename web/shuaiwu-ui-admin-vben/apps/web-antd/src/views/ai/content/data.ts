@@ -112,6 +112,9 @@ export function useGridColumns(): VxeTableGridOptions<ContentApi.Content>['colum
       field: 'files',
       title: '文件列表',
       minWidth: 120,
+      cellRender: {
+        name: 'CellImages',
+      },
     },
     {
       field: 'remark',

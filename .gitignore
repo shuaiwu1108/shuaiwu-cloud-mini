@@ -73,3 +73,5 @@ functions/mock
 screenshot
 .firebase
 sessionStore
+
+/LOG_FILE_IS_UNDEFINED
