@@ -1,5 +1,8 @@
 package com.shuaiwu.cloud.module.ai.controller.admin.content;
 
+import cn.hutool.json.JSONArray;
+import com.shuaiwu.cloud.framework.common.util.http.HttpUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -46,6 +49,15 @@ public class AiContentController {
     
     @Autowired
     private JmController jmController;
+
+    @Value("${openrouter.info.url}")
+    private String openrouterUrl;
+
+    @Value("${openrouter.info.apiKey}")
+    private String openrouterApikey;
+
+    @Value("${openrouter.info.model}")
+    private String openrouterModel;
 
     @PostMapping("/create")
     @Operation(summary = "创建作品管理")
@@ -121,11 +133,18 @@ public class AiContentController {
             return success(false);
         }
         
-        // 2. 生成prompt（如果作品中没有prompt，则使用content作为prompt）
-        // TODO 基于作品内容，生成prompt
+        // 2. 生成prompt
         String prompt = content.getPrompt();
         if (prompt == null || prompt.isEmpty()) {
-            prompt = content.getContent();
+            JSONObject body = new JSONObject();
+            body.putOnce("model", openrouterModel);
+            JSONArray messages = new JSONArray();
+            messages.add(new JSONObject().putOnce("role", "user").putOnce("content", content.getContent()));
+            body.putOnce("messages", messages);
+            String res = HttpUtils.post(openrouterUrl, Map.of("Authorization", openrouterApikey), body.toString());
+            JSONObject resJson = new JSONObject(res);
+            prompt = resJson.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getStr("content");
+            content.setPrompt(prompt);
         }
         
         // 3. 调用即梦AI接口
